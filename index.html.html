@@ -1,124 +1,101 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trabaja Desde Casa</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajo Desde Casa</title>
+
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            background: #f4f4f4;
-        }
-        header {
-            background: #0a6cff;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
             color: white;
-            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             text-align: center;
         }
-        section {
-            max-width: 800px;
-            margin: 2rem auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+        .container {
+            max-width: 600px;
+            padding: 40px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 15px;
+            backdrop-filter: blur(4px);
+            animation: fadeIn 1.2s ease;
         }
-        h1, h2 {
-            margin-top: 0;
+
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 15px;
         }
-        .cta {
-            display: block;
-            width: fit-content;
-            margin: 2rem auto 0;
-            background: #0a6cff;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
+
+        p {
             font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.5;
         }
-        form input, form textarea {
-            width: 100%;
-            padding: 0.8rem;
-            margin-top: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
+
         button {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: #0a6cff;
-            color: white;
+            background-color: #00c851;
             border: none;
-            border-radius: 8px;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            color: white;
             cursor: pointer;
-            font-size: 1rem;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #00973f;
+            transform: scale(1.05);
+        }
+
+        /* Animación */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .success-message {
+            font-size: 1.4rem;
+            color: #00ff8c;
+            margin-top: 20px;
         }
     </style>
+
 </head>
 <body>
-    <header>
-        <h1>Trabaja Desde Casa</h1>
-        <p>Buscamos personas con nivel de inglés, una computadora y conexión a internet.</p>
-    </header>
 
-    <section>
-        <h2>Únete a Nuestro Equipo</h2>
-        <p>Estamos reclutando candidatos responsables, motivados y con un buen dominio del inglés para trabajar de manera remota. Solo necesitas:</p>
-        <ul>
-            <li>Computadora o laptop</li>
-            <li>Buena conexión a internet</li>
-            <li>Nivel de inglés intermedio o avanzado</li>
-        </ul>
+<div class="container">
+    <h1>Oportunidad de Trabajo Desde Casa</h1>
+    <p>
+        Gana dinero desde la comodidad de tu hogar con una oportunidad legal, 
+        sencilla y disponible para personas sin experiencia.  
+        Completa el formulario para recibir toda la información.
+    </p>
 
-        <h2>Formulario de Aplicación</h2>
-        <form action="https://formspree.io/f/xzzoyjwq" method="POST">
-            <label>Nombre Completo</label>
-            <input name="nombre" type="text" placeholder="Tu nombre" required />
+    <a href="https://formspree.io/f/xzzoyjwq">
+        <button>Completar Formulario</button>
+    </a>
 
-            <label>Email</label>
-            <input name="email" type="email" placeholder="correo@example.com" required />
-
-            <label>Nivel de Inglés</label>
-            <input name="nivel_ingles" type="text" placeholder="Intermedio, Avanzado, etc." required />
-
-            <label>Mensaje o Presentación</label>
-            <textarea name="mensaje" rows="5" placeholder="Cuéntanos sobre ti"></textarea>
-
-            <button type="submit">Enviar Aplicación</button>
-        </form>
-
-<!-- Mensaje de éxito -->
-<p id="successMessage" style="display:none; color: green; font-weight: bold; margin-top: 1rem;">
-    ¡Formulario enviado correctamente!
-</p>
+    <div id="success" class="success-message" style="display:none;">
+        ✔ Formulario enviado correctamente
+    </div>
+</div>
 
 <script>
-// Mostrar mensaje de éxito cuando Formspree responde correctamente
-window.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector("form");
-    const successMessage = document.getElementById("successMessage");
-
-    form.addEventListener("submit", async function(event) {
-        event.preventDefault(); // evita recargar la página
-
-        const formData = new FormData(form);
-
-        // Envía los datos a Formspree
-        const response = await fetch(form.action, {
-            method: form.method,
-            body: formData,
-            headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-            form.reset();
-            successMessage.style.display = "block";
-        }
-    });
-});
+    // Detectar si viene de Formspree con ?success=1
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("success")) {
+        document.getElementById("success").style.display = "block";
+    }
 </script>
-    </section>
+
 </body>
 </html>
+
