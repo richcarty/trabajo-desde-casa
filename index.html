@@ -17,26 +17,35 @@
             align-items: center;
             height: 100vh;
             text-align: center;
+            padding: 20px;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 550px;
             padding: 40px;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.55);
             border-radius: 15px;
             backdrop-filter: blur(4px);
             animation: fadeIn 1.2s ease;
         }
 
         h1 {
-            font-size: 2.4rem;
-            margin-bottom: 15px;
+            font-size: 2rem;
+            margin-bottom: 10px;
         }
 
         p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            line-height: 1.5;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
         }
 
         button {
@@ -48,41 +57,48 @@
             cursor: pointer;
             border-radius: 10px;
             transition: 0.3s;
+            margin-top: 15px;
+            width: 100%;
         }
 
         button:hover {
             background-color: #00973f;
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
-        /* Animación */
+        .success-message {
+            font-size: 1.3rem;
+            color: #00ff8c;
+            margin-top: 20px;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .success-message {
-            font-size: 1.4rem;
-            color: #00ff8c;
-            margin-top: 20px;
-        }
     </style>
-
 </head>
 <body>
 
 <div class="container">
     <h1>Oportunidad de Trabajo Desde Casa</h1>
-    <p>
-        Gana dinero desde la comodidad de tu hogar con una oportunidad legal, 
-        sencilla y disponible para personas sin experiencia.  
-        Completa el formulario para recibir toda la información.
-    </p>
+    <p>Gana dinero desde tu hogar con una oportunidad sencilla, flexible y disponible para personas sin experiencia. Completa el formulario para recibir toda la información.</p>
 
-    <a href="https://formspree.io/f/xzzoyjwq">
-        <button>Completar Formulario</button>
-    </a>
+    <!-- FORMULARIO REAL -->
+    <form action="https://formspree.io/f/xzzoyjwq" method="POST">
+        <input type="text" name="nombre" placeholder="Tu nombre" required>
+        <input type="email" name="email" placeholder="Tu correo" required>
+        <input type="text" name="whatsapp" placeholder="Tu WhatsApp" required>
 
+        <!-- NUEVO CAMPO DE REDES SOCIALES -->
+        <textarea name="redes" placeholder="Comparte tus redes sociales (Instagram, Facebook, TikTok, etc.)" rows="3" required></textarea>
+
+        <textarea name="mensaje" placeholder="Cuéntanos por qué te interesa esta oportunidad" rows="4" required></textarea>
+
+        <button type="submit">Enviar Formulario</button>
+    </form>
+
+    <!-- MENSAJE DE EXITO -->
     <div id="success" class="success-message" style="display:none;">
         ✔ Formulario enviado correctamente
     </div>
@@ -98,4 +114,5 @@
 
 </body>
 </html>
+
 
